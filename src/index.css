@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
+
+@layer base {
+  html {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 12px;
+    line-height: 15px;
+    font-kerning: auto;
+    letter-spacing: 1px;
+    color: #828fa3;
+    font-weight: 600;
+  }
+
+  h5 {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 23px;
+  }
+}
