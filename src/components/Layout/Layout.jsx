@@ -1,71 +1,33 @@
-import { Link } from "react-router-dom";
-
-import LogoDark from "../../assets/logo-dark.svg";
-import MenuItemIcon from "../../assets/icon-board.svg";
-import Appbar from "./Appbar";
 import { useState } from "react";
-import classNames from "classnames";
+import useModalContext from "../hooks/useModalContext";
 
-function Layout({ children, data }) {
-  const [active, setActive] = useState(data[0].name);
+import AppBar from "./AppBar";
+import Modal from "../Modal";
+import Sidebar from "../Sidebar";
+
+function Layout({ children }) {
   const [collapse, setCollapse] = useState(false);
-
-  const menuItems = data.map((item, i) => {
-    let link;
-    if (i === 0) link = "/";
-    else if (i === 1) link = "marketing";
-    else link = "roadmap";
-    return {
-      label: item.name,
-      link,
-    };
-  });
-
-  const handleActive = (value) => {
-    setActive(value);
-  };
+  const { showModal } = useModalContext();
 
   const handleCollapse = () => {
     setCollapse(!collapse);
   };
 
-  const className = classNames(
-    "sm:flex flex-col lg:min-w-[300px] min-w-[260px] p-9 transition-[width] ease-linear hidden",
-    {
-      "md:hidden": collapse,
-    }
-  );
-  const renderMinuItems = menuItems.map((item) => {
-    return (
-      <Link
-        key={item.label}
-        to={item.link}
-        onClick={() => handleActive(item.label)}
-      >
-        <li className="flex cursor-pointer items-end">
-          <img className="mr-4" src={MenuItemIcon} alt="dark logo" />
-          <h4>{item.label}</h4>
-        </li>
-      </Link>
-    );
-  });
   return (
-    <div className="flex w-full relative min-h-screen h-full">
-      <aside className={className}>
-        <div className="mb-5">
-          <img src={LogoDark} alt="dark logo" />
-        </div>
-        <ul className="flex flex-col gap-3 justify-start items-start">
-          {renderMinuItems}
-        </ul>
-        <button onClick={handleCollapse}>Hide</button>
-      </aside>
-
-      <main className="flex-3 bg-[#F4F7FD]">
-        <Appbar title={active} collapse={collapse} />
+    <div className="flex h-full">
+      <Sidebar handleCollapse={handleCollapse} collapse={collapse} />
+      <main className="flex-3 overflow-scroll min-h-screen h-full dark:bg-dark-bg bg-light-bg items-center">
+        <AppBar collapse={collapse} />
         {collapse && <button onClick={handleCollapse}>Hide</button>}
-        {children}
+        <div className="flex min-h-screen h-full p-5 gap-4 border-l-2  border-lines-light dark:border-lines-dark">
+          {children}
+        </div>
       </main>
+      {showModal && (
+        <Modal className="sm:hidden">
+          <Sidebar modal />
+        </Modal>
+      )}
     </div>
   );
 }

@@ -1,5 +1,3 @@
-import React from "react";
-
 function ListTasks({ data }) {
   const renderTasks = data.tasks.map((task) => {
     const subtasksLength = task.subtasks.length;
@@ -10,9 +8,9 @@ function ListTasks({ data }) {
     return (
       <div
         key={task.title}
-        className="lg:w-60  p-4 bg-white rounded-md cursor-pointer shadow-lg shadow-slate-200"
+        className="w-64 p-4 bg-white dark:bg-dark-gray rounded-md cursor-pointer shadow shadow-light-lines dark:shadow-dark-gray"
       >
-        <h5>{task.title}</h5>
+        <h5 className="dark:text-white">{task.title}</h5>
         <h4 className="text-[10px] mt-1">{`${subtasks} of ${subtasksLength} subtasks`}</h4>
       </div>
     );
