@@ -7,6 +7,7 @@
 @layer base {
   html {
     font-family: "Plus Jakarta Sans", sans-serif;
+    box-sizing: border-box;
   }
 
   h1 {
@@ -46,4 +47,7 @@
     font-size: 13px;
     line-height: 23px;
   }
+}
+
+* {
 }

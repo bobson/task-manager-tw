@@ -6,7 +6,7 @@ const NavigationContext = createContext();
 export const NavigationProvider = ({ children }) => {
   const [activePage, setActive] = useState(boards[0].name);
 
-  const handleActive = (value) => {
+  const handleActivePage = (value) => {
     setActive(value);
   };
 
@@ -22,7 +22,9 @@ export const NavigationProvider = ({ children }) => {
   });
 
   return (
-    <NavigationContext.Provider value={{ activePage, handleActive, menuItems }}>
+    <NavigationContext.Provider
+      value={{ activePage, handleActivePage, menuItems }}
+    >
       {children}
     </NavigationContext.Provider>
   );

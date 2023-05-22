@@ -10,7 +10,6 @@ import ModalPage from "./pages/ModalPage";
 function App() {
   return (
     <Layout data={boards}>
-      {/* <div className="flex  h-full p-5 gap-4 border-l-2  border-lines-light dark:border-lines-dark"> */}
       <Routes>
         <Route path="/" element={<PlatformLaunch data={boards[0].columns} />} />
 
@@ -23,7 +22,6 @@ function App() {
 
         <Route path="modal" element={<ModalPage />} />
       </Routes>
-      {/* </div> */}
     </Layout>
   );
 }

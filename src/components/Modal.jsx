@@ -4,12 +4,9 @@ const Modal = ({ children, className }) => {
   return ReactDOM.createPortal(
     <>
       <div
-        className={`absolute inset-0 mt-16 bg-black opacity-60 ${className}`}
-      />
-      <div
-        className={`absolute inset-0 mt-10 w-screen p-10 bg-transparent  ${className}`}
+        className={`absolute pt-4 justify-center h-full flex inset-0 bg-[rgba(0,0,0,0.6)]  ${className}`}
       >
-        {children}
+        <div className="w-4/5">{children}</div>
       </div>
     </>,
     document.querySelector(".modal-container")
