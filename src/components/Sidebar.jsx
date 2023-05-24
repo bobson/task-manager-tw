@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import useNavigationContext from "./hooks/useNavigationContext";
-import useModalContext from "./hooks/useModalContext";
-import useThemeContext from "./hooks/useThemeContext";
+import useNavigationContext from "../hooks/useNavigationContext";
+
+import useThemeContext from "../hooks/useThemeContext";
 import classNames from "classnames";
 
 import MenuItemIcon from "../assets/icon-board.svg";
@@ -13,20 +13,17 @@ import HideSidebar from "../assets/icon-hide-sidebar.svg";
 
 import Button from "./Button";
 
-function Sidebar({ handleCollapse, collapse, modal }) {
+function Sidebar({ handleShowSidebar, showSidebar, modal }) {
   const { dark, toggleTheme } = useThemeContext();
   const { activePage, handleActivePage, menuItems } = useNavigationContext();
-  const { close } = useModalContext();
 
   let classes;
-  if (modal)
-    classes =
-      "flex flex-col rounded-md p-7 bg-white margin-auto dark:bg-dark-gray sm:hidden";
+  if (modal) classes = "flex flex-col sm:hidden";
   else
     classes = classNames(
-      "sm:flex flex-col justify-between w-72 p-7 gap-4 bg-white overflow-hidden dark:bg-dark-gray hidden",
+      "sm:flex flex-col justify-between w-72 p-7 gap-4 bg-white dark:bg-dark-gray hidden border-r-2  border-lines-light dark:border-lines-dark",
       {
-        "sm:hidden": collapse,
+        "sm:hidden": showSidebar,
       }
     );
 
@@ -97,7 +94,6 @@ function Sidebar({ handleCollapse, collapse, modal }) {
           <Button
             onClick={() => {
               toggleTheme();
-              close();
             }}
             primary
             className="h-5 w-10 py-1 px-1"
@@ -111,7 +107,7 @@ function Sidebar({ handleCollapse, collapse, modal }) {
           <img src={IconDarkTheme} alt="icon-light-theme" />
         </div>
         <div
-          onClick={handleCollapse}
+          onClick={handleShowSidebar}
           className="my-7 hidden sm:flex items-center gap-3 cursor-pointer"
         >
           <img src={HideSidebar} alt="hide" />

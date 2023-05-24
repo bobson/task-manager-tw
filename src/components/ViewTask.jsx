@@ -4,7 +4,6 @@ import ChevronDown from "../assets/icon-chevron-down.svg";
 function ViewTask({ task }) {
   const subtasksLength = task.subtasks.length;
   const subtasks = task.subtasks.reduce((acc, sub) => acc + sub.isCompleted, 0);
-  console.log(task.subtasks);
 
   const renderSubtasks = task.subtasks.map((subtask) => {
     return (
@@ -34,7 +33,7 @@ function ViewTask({ task }) {
   });
 
   return (
-    <div className="flex flex-col gap-4 dark:text-white">
+    <div className="flex w-full flex-col gap-4 dark:text-white">
       <div className="flex items-center justify-between">
         <h2>{task.title}</h2>
         <img className="cursor-pointer" src={VerticalDots} alt="dots" />

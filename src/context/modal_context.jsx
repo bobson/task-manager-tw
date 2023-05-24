@@ -5,11 +5,11 @@ const ModalContext = createContext();
 export const ModalProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const toggleOpen = () => setShowModal(!showModal);
-  const close = () => setShowModal(false);
+  const toggleShowModal = () => setShowModal(!showModal);
+  const onClose = () => setShowModal(false);
 
   return (
-    <ModalContext.Provider value={{ showModal, toggleOpen, close }}>
+    <ModalContext.Provider value={{ showModal, toggleShowModal, onClose }}>
       {children}
     </ModalContext.Provider>
   );

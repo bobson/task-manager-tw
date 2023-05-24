@@ -1,21 +1,23 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import ViewTask from "./ViewTask";
+import useModal from "../hooks/useModal";
 
 function ListTasks({ data }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, toggleModal, closeModal] = useModal();
   const [task, setTask] = useState("");
 
   const handleClick = (task) => {
-    setShowModal(!showModal);
+    toggleModal();
     setTask(task);
   };
 
-  const onClose = () => setShowModal(false);
-
   const renderTasks = data.tasks.map((task) => {
-    var subtasksLength = task.subtasks.length;
-    var subtasks = task.subtasks.reduce((acc, sub) => acc + sub.isCompleted, 0);
+    const subtasksLength = task.subtasks.length;
+    const subtasks = task.subtasks.reduce(
+      (acc, sub) => acc + sub.isCompleted,
+      0
+    );
     return (
       <div
         key={task.title}
@@ -29,7 +31,7 @@ function ListTasks({ data }) {
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <article className="flex flex-col gap-4">
       {data.tasks.length ? (
         <h4>
           {data.name.toUpperCase()} {`(${data.tasks.length})`}
@@ -37,11 +39,11 @@ function ListTasks({ data }) {
       ) : null}
       {renderTasks}
       {showModal && (
-        <Modal onClose={onClose} className="items-center">
+        <Modal onClose={closeModal} className="items-center">
           <ViewTask task={task} />
         </Modal>
       )}
-    </div>
+    </article>
   );
 }
 

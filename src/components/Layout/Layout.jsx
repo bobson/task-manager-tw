@@ -1,31 +1,32 @@
 import { useState } from "react";
-import useModalContext from "../hooks/useModalContext";
 
 import AppBar from "./AppBar";
-import Modal from "../Modal";
+
 import Sidebar from "../Sidebar";
 import Button from "../Button";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
 
 function Layout({ children }) {
-  const [collapse, setCollapse] = useState(false);
-  const { showModal } = useModalContext();
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  const handleCollapse = () => {
-    setCollapse(!collapse);
+  const handleShowSidebar = () => {
+    setShowSidebar(!showSidebar);
   };
 
   return (
-    <div className="flex h-full">
-      <Sidebar collapse={collapse} handleCollapse={handleCollapse} />
-      <div className="flex-3 overflow-scroll min-h-screen h-full dark:bg-dark-bg bg-light-bg items-center">
-        <AppBar collapse={collapse} handleCollapse={handleCollapse} />
-        <main className="flex relative min-h-screen h-full w-full p-5 gap-4 border-l-2 border-t-2  border-lines-light dark:border-lines-dark">
+    <div className="flex h-screen">
+      <Sidebar
+        showSidebar={showSidebar}
+        handleShowSidebar={handleShowSidebar}
+      />
+      <div className="flex-3 overflow-scroll dark:bg-dark-bg bg-light-bg items-center">
+        <AppBar showSidebar={showSidebar} />
+        <main className="flex relative w-full p-5 gap-4">
           {children}
-          {collapse && (
+          {showSidebar && (
             <Button
-              className="absolute pl-6 hidden sm:block left-[-20px] bottom-10"
-              onClick={handleCollapse}
+              className="fixed pl-6 hidden sm:block left-[-20px] bottom-20"
+              onClick={handleShowSidebar}
               primary
             >
               <img src={ShowSidebar} alt="show-sidebar" />
@@ -33,11 +34,6 @@ function Layout({ children }) {
           )}
         </main>
       </div>
-      {showModal && (
-        <Modal className="sm:hidden mt-16">
-          <Sidebar modal />
-        </Modal>
-      )}
     </div>
   );
 }
