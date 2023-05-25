@@ -14,12 +14,12 @@ function Layout({ children }) {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen">
       <Sidebar
         showSidebar={showSidebar}
         handleShowSidebar={handleShowSidebar}
       />
-      <div className="flex-3 overflow-scroll dark:bg-dark-bg bg-light-bg items-center">
+      <div className="flex-3 overflow-auto dark:bg-dark-bg bg-light-bg items-center">
         <AppBar showSidebar={showSidebar} />
         <main className="flex relative w-full p-5 gap-4">
           {children}

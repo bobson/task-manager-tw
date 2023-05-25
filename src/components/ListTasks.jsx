@@ -2,15 +2,19 @@ import { useState } from "react";
 import Modal from "./Modal";
 import ViewTask from "./ViewTask";
 import useModal from "../hooks/useModal";
+import EditTask from "./EditTask";
 
 function ListTasks({ data }) {
   const [showModal, toggleModal, closeModal] = useModal();
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState(null);
+  const [content, setContent] = useState(null);
 
   const handleClick = (task) => {
     toggleModal();
     setTask(task);
   };
+
+  const handleContent = (value) => setContent(value);
 
   const renderTasks = data.tasks.map((task) => {
     const subtasksLength = task.subtasks.length;
@@ -30,6 +34,16 @@ function ListTasks({ data }) {
     );
   });
 
+  let contentToShow;
+  if (content === "edit") contentToShow = <EditTask task={task} />;
+  else if (content === "delete")
+    contentToShow = (
+      <div className="flex w-90 h-90 flex-col gap-4 dark:text-white">
+        DelteTask
+      </div>
+    );
+  else contentToShow = <ViewTask handleContent={handleContent} task={task} />;
+
   return (
     <article className="flex flex-col gap-4">
       {data.tasks.length ? (
@@ -39,8 +53,12 @@ function ListTasks({ data }) {
       ) : null}
       {renderTasks}
       {showModal && (
-        <Modal onClose={closeModal} className="items-center">
-          <ViewTask task={task} />
+        <Modal
+          onClose={closeModal}
+          handleContent={handleContent}
+          className="items-center"
+        >
+          {contentToShow}
         </Modal>
       )}
     </article>

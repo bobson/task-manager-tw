@@ -1,7 +1,10 @@
 import VerticalDots from "../assets/icon-vertical-ellipsis.svg";
 import ChevronDown from "../assets/icon-chevron-down.svg";
+import { useEffect, useState } from "react";
 
-function ViewTask({ task }) {
+function ViewTask({ task, handleContent }) {
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const subtasksLength = task.subtasks.length;
   const subtasks = task.subtasks.reduce((acc, sub) => acc + sub.isCompleted, 0);
 
@@ -32,11 +35,31 @@ function ViewTask({ task }) {
     );
   });
 
+  const renderDropdown = (
+    <div className="bg-white absolute right-[-80px] bottom-[-90px]  bg-white dark:bg-dark-gray dark:bg-dark-gray flex flex-col gap-3 rounded-md w-40 p-4">
+      <h4 onClick={() => handleContent("edit")} className="cursor-pointer">
+        Edit Task
+      </h4>
+      <h4
+        onClick={() => handleContent("delete")}
+        className="text-red cursor-pointer"
+      >
+        DleteTask
+      </h4>
+    </div>
+  );
+
   return (
     <div className="flex w-full flex-col gap-4 dark:text-white">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center relative justify-between">
         <h2>{task.title}</h2>
-        <img className="cursor-pointer" src={VerticalDots} alt="dots" />
+        <img
+          onClick={() => setShowDropdown(!showDropdown)}
+          className="cursor-pointer"
+          src={VerticalDots}
+          alt="dots"
+        />
+        {showDropdown && renderDropdown}
       </div>
       <h4 className="font-medium">{task.description}</h4>
       <div className="flex flex-col gap-4">
