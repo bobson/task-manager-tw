@@ -36,7 +36,7 @@ function ViewTask({ task, handleContent }) {
   });
 
   const renderDropdown = (
-    <div className="bg-white absolute right-[-80px] bottom-[-90px]  bg-white dark:bg-dark-gray dark:bg-dark-gray flex flex-col gap-3 rounded-md w-40 p-4">
+    <div className="bg-white absolute sm:right-[-80px] right-0  top-8 bg-white dark:bg-dark-gray dark:bg-dark-gray flex flex-col gap-3 rounded-md sm:w-40 p-4">
       <h4 onClick={() => handleContent("edit")} className="cursor-pointer">
         Edit Task
       </h4>
