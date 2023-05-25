@@ -18,7 +18,7 @@ function Sidebar({ handleShowSidebar, showSidebar, modal }) {
   const { activePage, handleActivePage, menuItems } = useNavigationContext();
 
   let classes;
-  if (modal) classes = "flex flex-col sm:hidden";
+  if (modal) classes = "flex flex-col sm:hidden w-60";
   else
     classes = classNames(
       "sm:flex flex-col justify-between w-72 p-7 gap-4 bg-white dark:bg-dark-gray hidden border-r-2  border-lines-light dark:border-lines-dark",

@@ -35,7 +35,7 @@ function EditTask({ task }) {
     );
   });
   return (
-    <div className="flex max-h-[calc(100vh-200px)] overflow-y-auto flex-col gap-4 dark:text-white">
+    <div className="flex max-h-[calc(100vh-300px)] overflow-y-auto flex-col gap-4 dark:text-white">
       <form className="flex flex-col gap-4">
         <h2>Edit Task</h2>
         <div className="flex flex-col text-xs">

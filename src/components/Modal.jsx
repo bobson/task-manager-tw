@@ -9,7 +9,7 @@ const Modal = ({ children, className, onClose, handleContent }) => {
 
     return () => {
       document.body.classList.remove("overflow-hidden");
-      handleContent("");
+      handleContent && handleContent("");
     };
   }, []);
 
@@ -25,7 +25,7 @@ const Modal = ({ children, className, onClose, handleContent }) => {
       onClick={(e) => handleClick(e)}
     >
       <div
-        className="w-[480px] bg-white dark:bg-dark-gray rounded-md p-7 m-1"
+        className="w-[480px] bg-white dark:bg-dark-gray rounded-md p-7 m-1 mt-6"
         ref={ref}
       >
         {children}
